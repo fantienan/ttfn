@@ -101,4 +101,10 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: 'sftp'
+  host: 112.126.93.220
+  user: root
+  pass: TIETIEsusu210220
+  remotePath: /otp/fantienan/blog
+  ignore: node_modules
+  verbose: true

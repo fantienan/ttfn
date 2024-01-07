@@ -1,135 +1,79 @@
-# @mapbox/mapbox-gl-draw
+# @ttfn/mapbox-gl-draw
 
-[![Build Status](https://travis-ci.org/mapbox/mapbox-gl-draw.svg?branch=main)](https://travis-ci.org/mapbox/mapbox-gl-draw)
+在[mapbox-gl-draw](https://github.com/mapbox/mapbox-gl-draw)的基础上扩展了更多功能。
 
-Adds support for drawing and editing features on [mapbox-gl.js](https://www.mapbox.com/mapbox-gl-js/) maps. [See a live example here](https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-draw/)
-
-**Requires [mapbox-gl-js](https://github.com/mapbox/mapbox-gl-js).**
-
-**If you are developing with `mapbox-gl-draw`, see [API.md](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/API.md) for documentation.**
-
-### Installing
+## 安装
 
 ```
-npm install @mapbox/mapbox-gl-draw
+pnpm add @ttfn/mapbox-gl-draw
 ```
 
-Draw ships with CSS, make sure you include it in your build.
+## 功能
 
-### Usage in your application
+- 撤销、回退
+- 完成、取消
+- 坐标点绘制
+- 编辑图形
+- 切换主题
 
-#### JavaScript
+## 配置
 
-**When using modules**
+### disabledClickOnVertex
+- 描述：双击落点或者落点与其它节点重合时是否禁止完成绘制
+- 类型： boolean | undefined
+- 默认值：undefined
 
-```js
-import mapboxgl from 'mapbox-gl';
-import MapboxDraw from "@mapbox/mapbox-gl-draw";
-```
+### ignoreClickOnVertex
+- 描述：是否忽略双击落点或者落点与其它节点重合的检测
+- 类型： boolean | undefined
+- 默认值：undefined
 
-**When using a CDN**
+### stopPropagationClickActiveFeatureHandlerClassName
+- 描述：当点击源的元素有selector时，阻止触发高亮图斑点击事件
+- 类型： string | undefined
+- 默认值：undefined
 
-```html
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.js'></script>
-```
+### clickNotthingNoChangeMode
+- 描述：编辑模式下点击图形以外部分不退出编辑模式
+- 类型： boolean | undefined
+- 默认值：true
 
-#### CSS
+### disabledDragVertexWithSimpleSelectMode
+- 描述：simple_select mode 下禁止拖拽节点，点要素在simple_select mode 下才允许编辑
+- 类型： boolean | undefined
+- 默认值：undefined
 
-**When using modules**
- ```js
-import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css'
- ```
+### disabledDrag
+- 描述：禁止拖拽
+- 类型： boolean | undefined
+- 默认值：undefined
 
-**When using CDN**
-```html
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.4.2/mapbox-gl-draw.css' type='text/css' />
-```
+### disableSelect
+- 描述：禁止选中
+- 类型： boolean | undefined
+- 默认值：undefined
 
-### Typescript
-
-Typescript definition files are available as part of the [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/mapbox__mapbox-gl-draw) package.
-
-```
-npm install @types/mapbox__mapbox-gl-draw
-```
-
-### Example usage
-
-```js
-mapboxgl.accessToken = 'YOUR_ACCESS_TOKEN';
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v12',
-  center: [40, -74.50],
-  zoom: 9
-});
-
-var Draw = new MapboxDraw();
-
-// Map#addControl takes an optional second argument to set the position of the control.
-// If no position is specified the control defaults to `top-right`. See the docs
-// for more details: https://docs.mapbox.com/mapbox-gl-js/api/#map#addcontrol
-
-map.addControl(Draw, 'top-left');
-
-map.on('load', function() {
-  // ALL YOUR APPLICATION CODE
-});
-```
-
-https://www.mapbox.com/mapbox-gl-js/example/mapbox-gl-draw/
-
-### See [API.md](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/API.md) for complete reference.
-
-### Enhancements and New Interactions
-
-For additional functionality [check out our list of custom modes](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
-
-Mapbox Draw accepts functionality changes after the functionality has been proven out via a [custom mode](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/MODES.md#creating-modes-for-mapbox-draw). This lets users experiment and validate their mode before entering a review process, hopefully promoting innovation. When you write a custom mode, please open a PR adding it to our [list of custom modes](https://github.com/mapbox/mapbox-gl-draw/blob/main/docs/MODES.md#available-custom-modes).
-
-### Developing and testing
-
-Install dependencies, build the source files and crank up a server via:
-
-```
-git clone git@github.com:mapbox/mapbox-gl-draw.git
-yarn install
-yarn start & open "http://localhost:9967/debug/?access_token=<token>"
-```
-
-### Testing
-
-```
-npm run test
-```
-
-### Publishing
-
-To GitHub and NPM:
-
-```
-npm version (major|minor|patch)
-git push --tags
-git push
-npm publish
-```
-
-To CDN:
-
-```
-# make sure you are authenticated for AWS
-git checkout v{x.y.z}
-yarn install
-yarn run prepublish
-aws s3 cp --recursive --acl public-read dist s3://mapbox-gl-js/plugins/mapbox-gl-draw/v{x.y.z}
-```
-
-Update the version number in [the GL JS example](https://github.com/mapbox/mapbox-gl-js/blob/publisher-production/docs/pages/example/mapbox-gl-draw.html).
-
-### Naming actions
-
-We're trying to follow standards when naming things. Here is a collection of links where we look for inspiration.
-
-- https://turfjs.org
-- https://shapely.readthedocs.io/en/latest/manual.html
+### measureOptions
+- 描述：测量配置
+- 类型： object | undefined
+- 默认值：undefined
+- enable: 
+    - 描述：是否启用测量功能
+    - 类型：boolean | undefined 
+    - 默认值：undefined
+- unit: 
+    - 描述：测量单位
+    - 类型：object | undefined
+    - 默认值：undefined，
+        - line: 
+            - 描述：线测量单位，
+            - 类型：MeasureLineUnit | undefined
+            - 默认值：undefined
+        - area: 
+            - 描述：面积测量单位
+            - 类型：MeasureAreaUnit | undefined
+            - 默认值：undefined
+- precision: 
+   - 描述：测量精度
+   - 类型：number | undefined
+   - 默认值：undefined
