@@ -26,7 +26,7 @@ const themes =[
 ]
 
 function App() {
-  const [map, setMap] = useState<mapboxgl.Map>()
+  const [, setMap] = useState<mapboxgl.Map>()
   const [draw, setDraw] = useState<MapboxDraw>()
   const [themeIndex, setThemeIndex] = useState(0)
   const [controlContainer, setControlContainer] = useState<HTMLDivElement | null>(null)
@@ -36,8 +36,6 @@ function App() {
     setThemeIndex(index);
     draw?.setStyle(themes[index].style)
   }
-
-  window.onTheme = onTheme
 
   const onEdit = () => draw?.edit(mockFeature())
 
@@ -51,7 +49,6 @@ function App() {
       hash: true,
       style: '/style.json' + '?t=' + Date.now(),
     });
-debugger
     const _draw = new MapboxDraw({
         /** 双击落点或者落点与其它节点重合时是否禁止完成绘制 */
         disabledClickOnVertex: false,

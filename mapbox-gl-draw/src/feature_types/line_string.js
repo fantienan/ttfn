@@ -42,7 +42,7 @@ LineString.prototype.updateCoordinate = function(path, lng, lat) {
 
 // extend start
 LineString.prototype.execMeasure = function()  {
-  if (!this.isValid()) return;
+  if (!this.measure.enabled || !this.isValid()) return;
   this.ctx.store.afterRender(() => {
     const {unit, precision} = this.measure.options;
     const markers = this.measure.markers;

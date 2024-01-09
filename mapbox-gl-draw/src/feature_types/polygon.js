@@ -75,7 +75,7 @@ Polygon.prototype.updateCoordinate = function(path, lng, lat) {
 
 // extend start
 Polygon.prototype.execMeasure = function()  {
-  if (!this.isValid()) return;
+  if (!this.measure.enabled || !this.isValid()) return;
   const markers = this.measure.markers;
   this.ctx.store.afterRender(() => {
     const {unit, precision} = this.measure.options;
